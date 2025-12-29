@@ -1,9 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "MoveTimer.h"
 
-MoveTimer::MoveTimer(time_t limit) {
-    timerON = false;
-    startTime = 0;
+MoveTimer::MoveTimer(time_t limit):BaseTimer() {
     limitTime = limit;
     totalTimeUsed = 0;
     currentRemaining = limit;
@@ -17,6 +15,7 @@ MoveTimer::~MoveTimer() {
 
 }
 
+//функция потока
 void MoveTimer::timerWorker() {
     while (timerON) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -40,22 +39,20 @@ void MoveTimer::timerWorker() {
     }
 }
 
+//старт
 void MoveTimer::start() {
     if (!timerON && currentRemaining > 0) {
         startTime = time(NULL);
         timerON = true;
-        workerThread = std::thread(&MoveTimer::timerWorker, this);
-    }
-    else if (currentRemaining <= 0) {
+        startThread();  
     }
 }
 
+// стоп
 void MoveTimer::stop() {
     if (timerON) {
         timerON = false;
-        if (workerThread.joinable()) {
-            workerThread.join();
-        }
+        stopThread();  
 
         time_t thisMoveTime = difftime(time(NULL), startTime);
         totalTimeUsed += thisMoveTime;
@@ -64,20 +61,15 @@ void MoveTimer::stop() {
     }
 }
 
+// ресет
 void MoveTimer::reset() {
-    if (timerON) {
-        stop();
-    }
-
-    if (workerThread.joinable()) {
-        workerThread.join();
-    }
-
+    stop();  
     totalTimeUsed = 0;
     startTime = 0;
     currentRemaining = limitTime;
 }
 
+// получение оставшегося времени
 time_t MoveTimer::getRemainingTimeSec() const {
     if (timerON) {
         time_t timeUsedThisMove = difftime(time(NULL), startTime);
@@ -89,6 +81,7 @@ time_t MoveTimer::getRemainingTimeSec() const {
     }
 }
 
+// получение использованного времени
 time_t MoveTimer::getUsedTimeSec() const {
     if (timerON) {
         return totalTimeUsed + difftime(time(NULL), startTime);
@@ -98,10 +91,7 @@ time_t MoveTimer::getUsedTimeSec() const {
     }
 }
 
-bool MoveTimer::ON_OFF() const {
-    return timerON;
-}
-
+// проверка. осталось ли время
 bool MoveTimer::isTimeUp() const {
     return getRemainingTimeSec() <= 0;
 }

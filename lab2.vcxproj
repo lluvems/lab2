@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseTimer.cpp" />
     <ClCompile Include="ChessClock.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="lab2.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseTimer.h" />
     <ClInclude Include="ChessClock.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="exceptions.h" />

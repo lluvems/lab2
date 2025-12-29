@@ -2,22 +2,22 @@
 
 MaterialSituationController::MaterialSituationController(TakenPieceController* tpc) : tpController(tpc), whiteTakenPieces(0), blackTakenPieces(0), totalTakenPieces(0) {}
 
-//уставновить кол-во взятых белых
+// уставновить кол-во взятых белых
 void MaterialSituationController::setWhiteTakenPieces(int n) {
     whiteTakenPieces = n;
 }
 
-//уставновить кол-во взятых черных
+// уставновить кол-во взятых черных
 void MaterialSituationController::setBlackTakenPieces(int n) {
     blackTakenPieces = n;
 }
 
-//посчитать общее кол-во
+// посчитать общее кол-во
 void MaterialSituationController::countTotalTakenPieces() {
     totalTakenPieces = getWhiteTakenPieces() + getBlackTakenPieces();
 }
 
-//обновить данные
+// обновить данные
 void MaterialSituationController::updateSituation() {
     setWhiteTakenPieces(tpController->getCutBishop(color::white) + tpController->getCutKnight(color::white) + tpController->getCutPawn(color::white)\
         + tpController->getCutQueen(color::white) + tpController->getCutRook(color::white));
@@ -28,22 +28,22 @@ void MaterialSituationController::updateSituation() {
     countTotalTakenPieces();
 }
 
-//получить кол-во взятых белых
+// получить кол-во взятых белых
 int MaterialSituationController::getWhiteTakenPieces() {
     return whiteTakenPieces;
 }
 
-//получить кол-во взятых черных
+// получить кол-во взятых черных
 int MaterialSituationController::getBlackTakenPieces() {
     return blackTakenPieces;
 }
 
-//получить общее кол-во
+// получить общее кол-во
 int MaterialSituationController::getTotalTakenPieces() {
     return totalTakenPieces;
 }
 
-//вывод
+// ывывод
 void MaterialSituationController::printMaterialSituation() const {
     MaterialSituationController* nonConstThis = const_cast<MaterialSituationController*>(this);
     nonConstThis->updateSituation();
