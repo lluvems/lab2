@@ -56,13 +56,13 @@ void MaterialSituationController::printMaterialSituation() const {
 
     int advantage = blackTakenPieces - whiteTakenPieces;
 
-    if (advantage > 0) {
-        std::cout << "Материальное преимущество у БЕЛЫХ: +" << advantage << std::endl;
-    }
-    else if (advantage < 0) {
-        std::cout << "Материальное преимущество у ЧЕРНЫХ: +" << -advantage << std::endl;
-    }
-    else {
-        std::cout << "Материальное равенство" << std::endl;
-    }
+    std::string status;
+    if (advantage > 0)
+        status = "Материальное преимущество у БЕЛЫХ: +" + std::to_string(advantage);
+    else if (advantage < 0)
+        status = "Материальное преимущество у ЧЕРНЫХ: +" + std::to_string(-advantage);
+    else
+        status = "Материальное равенство";
+
+    std::cout << status << std::endl;
 }
