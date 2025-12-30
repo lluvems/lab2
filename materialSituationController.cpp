@@ -20,6 +20,9 @@ void MaterialSituationController::countTotalTakenPieces() {
 
 // обновить данные
 void MaterialSituationController::updateSituation() {
+    if (!tpController) {
+        throw std::runtime_error("TakenPieceController is null!");
+    }
     setWhiteTakenPieces(tpController->getCutBishop(color::white) + tpController->getCutKnight(color::white) + tpController->getCutPawn(color::white)\
         + tpController->getCutQueen(color::white) + tpController->getCutRook(color::white));
 

@@ -52,5 +52,10 @@ int main() {
     takenController->cutPawn(color::white); // черные взяли белую пешку
     takenController->cutRook(color::black); // белые взяли черную ладью
     MaterialSituationController materialController(std::move(takenController));
-
+    try {
+        materialController.printMaterialSituation();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
 }
