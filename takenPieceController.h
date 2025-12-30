@@ -43,6 +43,8 @@ public:
     int getCutPawn(color pieceColor);
 
     void printTakenPieces() const;
+
+    friend string getSummary(const TakenPieceController& tpc);
 };
 
 #endif

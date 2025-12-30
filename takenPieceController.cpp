@@ -117,3 +117,9 @@ void TakenPieceController::printTakenPieces() const {
     cout << "Кони:" << cutBlackKnights << " ";
     cout << "Пешки:" << cutBlackPawns << endl;
 }
+
+string getSummary(const TakenPieceController& tpc) {
+    return "White pieces taken: " +
+        to_string(tpc.cutWhiteQueens + tpc.cutWhiteRooks + tpc.cutWhiteBishops +
+            tpc.cutWhiteKnights + tpc.cutWhitePawns);
+}
