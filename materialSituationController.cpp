@@ -1,7 +1,8 @@
 #include "materialSituationController.h"
 
-MaterialSituationController::MaterialSituationController(TakenPieceController* tpc) : tpController(tpc), whiteTakenPieces(0), blackTakenPieces(0), totalTakenPieces(0) {}
-
+MaterialSituationController::MaterialSituationController(std::unique_ptr<TakenPieceController> tpc)
+    : tpController(std::move(tpc)), whiteTakenPieces(0), blackTakenPieces(0), totalTakenPieces(0) {
+}
 // уставновить кол-во взятых белых
 void MaterialSituationController::setWhiteTakenPieces(int n) {
     whiteTakenPieces = n;

@@ -5,13 +5,13 @@
 
 class MaterialSituationController {
 private:
-    TakenPieceController* tpController;
+    std::unique_ptr<TakenPieceController> tpController;
     int whiteTakenPieces; //белых фигур взято
     int blackTakenPieces; //черных фигур взято
     int totalTakenPieces; //всего взято
 
 public:
-    MaterialSituationController(TakenPieceController* tpc);
+    MaterialSituationController(std::unique_ptr<TakenPieceController> tpc);
 
     void updateSituation(); //обновить данные
 
