@@ -30,6 +30,10 @@ int main() {
         std::cout << "\nВремя вышло!" << std::endl;
     }
 
+    
+    ChessClock::incrementGames();
+    std::cout << "Total games: " << ChessClock::getTotalGames() << std::endl;
+
     //Демонстрация контроллера взятых фигур
     TakenPieceController controller;
     std::cout << "Начало игры:" << std::endl;

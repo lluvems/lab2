@@ -72,3 +72,13 @@ void ChessClock::printTime() const {
     if (blackTimer.ON_OFF()) cout << " [ундхр]";
     cout << endl;
 }
+
+int ChessClock::totalGamesPlayed = 0;
+
+int ChessClock::getTotalGames() {
+    return totalGamesPlayed;
+}
+
+void ChessClock::incrementGames() {
+    ++totalGamesPlayed;
+}

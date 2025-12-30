@@ -7,6 +7,7 @@ class ChessClock {
 private:
     MoveTimer whiteTimer; // таймер белых
     MoveTimer blackTimer; // таймер черных
+    static int totalGamesPlayed;
 
 public:
     // Конструктор с лимитом времени (по умолчанию 5 минут)
@@ -25,6 +26,9 @@ public:
 
     void reset();
     void printTime() const;
+
+    static int getTotalGames();
+    static void incrementGames();
 };
 
 #endif
