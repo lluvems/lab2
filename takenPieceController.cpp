@@ -123,3 +123,25 @@ string getSummary(const TakenPieceController& tpc) {
         to_string(tpc.cutWhiteQueens + tpc.cutWhiteRooks + tpc.cutWhiteBishops +
             tpc.cutWhiteKnights + tpc.cutWhitePawns);
 }
+
+bool TakenPieceController::operator==(const TakenPieceController& other) const {
+    return cutWhiteQueens == other.cutWhiteQueens &&
+        cutWhiteRooks == other.cutWhiteRooks &&
+        // ... и так далее для всех полей
+        cutBlackPawns == other.cutBlackPawns;
+}
+
+TakenPieceController& TakenPieceController::operator+=(const TakenPieceController& other) {
+    cutWhiteQueens += other.cutWhiteQueens;
+    cutWhiteRooks += other.cutWhiteRooks;
+    // ... остальные
+    cutBlackPawns += other.cutBlackPawns;
+    return *this;
+}
+
+std::ostream& operator<<(std::ostream& os, const TakenPieceController& tpc) {
+    os << "Taken pieces summary:\n"
+        << "White: Q=" << tpc.cutWhiteQueens << ", R=" << tpc.cutWhiteRooks << "...\n"
+        << "Black: Q=" << tpc.cutBlackQueens << ", R=" << tpc.cutBlackRooks << "...";
+    return os;
+}

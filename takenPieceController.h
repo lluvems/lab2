@@ -45,6 +45,10 @@ public:
     void printTakenPieces() const;
 
     friend string getSummary(const TakenPieceController& tpc);
+
+    bool operator==(const TakenPieceController& other) const;
+    TakenPieceController& operator+=(const TakenPieceController& other);
+    friend std::ostream& operator<<(std::ostream& os, const TakenPieceController& tpc);
 };
 
 #endif
