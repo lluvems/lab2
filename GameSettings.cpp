@@ -27,19 +27,19 @@ bool GameSettings::getHighlightMoves() const {
 }
 
 void GameSettings::setRandomTurnOrder(bool random) {
-    randomTurnOrder = random;
+    this->randomTurnOrder = random;
 }
 
 void GameSettings::setTimeLimitEnabled(bool enabled) {
-    timeLimitEnabled = enabled;
+    this->timeLimitEnabled = enabled;
 }
 
 void GameSettings::setTimeLimitSeconds(time_t seconds) {
-    timeLimitSeconds = seconds;
+    this->timeLimitSeconds = seconds;
 }
 
 void GameSettings::setHighlightMoves(bool highlight) {
-    highlightMoves = highlight;
+    this->highlightMoves = highlight;
 }
 
 

@@ -30,6 +30,10 @@ int main() {
         std::cout << "\nВремя вышло!" << std::endl;
     }
 
+    
+    ChessClock::incrementGames();
+    std::cout << "Total games: " << ChessClock::getTotalGames() << std::endl;
+
     //Демонстрация контроллера взятых фигур
     TakenPieceController controller;
     std::cout << "Начало игры:" << std::endl;
@@ -43,11 +47,15 @@ int main() {
     controller.printTakenPieces();
 
     //Демонстрация Контроллера метермльного преимущества
-    TakenPieceController takenController;
-    MaterialSituationController materialController(&takenController);
-    takenController.cutQueen(color::white);   // черные взяли белого ферзя
-    takenController.cutPawn(color::white);    // черные взяли белую пешку
-    takenController.cutRook(color::black);    // белые взяли черную ладью
-    materialController.printMaterialSituation();
-
+    auto takenController = std::make_unique<TakenPieceController>();
+    takenController->cutQueen(color::white); // черные взяли белого ферзя
+    takenController->cutPawn(color::white); // черные взяли белую пешку
+    takenController->cutRook(color::black); // белые взяли черную ладью
+    MaterialSituationController materialController(std::move(takenController));
+    try {
+        materialController.printMaterialSituation();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
 }

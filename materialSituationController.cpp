@@ -1,7 +1,8 @@
 #include "materialSituationController.h"
 
-MaterialSituationController::MaterialSituationController(TakenPieceController* tpc) : tpController(tpc), whiteTakenPieces(0), blackTakenPieces(0), totalTakenPieces(0) {}
-
+MaterialSituationController::MaterialSituationController(std::unique_ptr<TakenPieceController> tpc)
+    : tpController(std::move(tpc)), whiteTakenPieces(0), blackTakenPieces(0), totalTakenPieces(0) {
+}
 // уставновить кол-во взятых белых
 void MaterialSituationController::setWhiteTakenPieces(int n) {
     whiteTakenPieces = n;
@@ -19,6 +20,9 @@ void MaterialSituationController::countTotalTakenPieces() {
 
 // обновить данные
 void MaterialSituationController::updateSituation() {
+    if (!tpController) {
+        throw std::runtime_error("TakenPieceController is null!");
+    }
     setWhiteTakenPieces(tpController->getCutBishop(color::white) + tpController->getCutKnight(color::white) + tpController->getCutPawn(color::white)\
         + tpController->getCutQueen(color::white) + tpController->getCutRook(color::white));
 
@@ -55,13 +59,13 @@ void MaterialSituationController::printMaterialSituation() const {
 
     int advantage = blackTakenPieces - whiteTakenPieces;
 
-    if (advantage > 0) {
-        std::cout << "Материальное преимущество у БЕЛЫХ: +" << advantage << std::endl;
-    }
-    else if (advantage < 0) {
-        std::cout << "Материальное преимущество у ЧЕРНЫХ: +" << -advantage << std::endl;
-    }
-    else {
-        std::cout << "Материальное равенство" << std::endl;
-    }
+    std::string status;
+    if (advantage > 0)
+        status = "Материальное преимущество у БЕЛЫХ: +" + std::to_string(advantage);
+    else if (advantage < 0)
+        status = "Материальное преимущество у ЧЕРНЫХ: +" + std::to_string(-advantage);
+    else
+        status = "Материальное равенство";
+
+    std::cout << status << std::endl;
 }
