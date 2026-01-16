@@ -145,3 +145,40 @@ std::ostream& operator<<(std::ostream& os, const TakenPieceController& tpc) {
         << "Black: Q=" << tpc.cutBlackQueens << ", R=" << tpc.cutBlackRooks << "...";
     return os;
 }
+
+
+AdvancedTakenPieceController::AdvancedTakenPieceController(const std::string& name)
+    : TakenPieceController(), ownerName(name) {
+ 
+}
+
+AdvancedTakenPieceController::AdvancedTakenPieceController(const AdvancedTakenPieceController& other)
+    : TakenPieceController(other), ownerName(other.ownerName) {
+   
+}
+
+AdvancedTakenPieceController& AdvancedTakenPieceController::operator=(const AdvancedTakenPieceController& other) {
+    if (this != &other) {
+        TakenPieceController::operator=(other);
+        ownerName = other.ownerName;
+    }
+    return *this;
+}
+
+void AdvancedTakenPieceController::printTakenPieces() const {
+    std::cout << "Владелец: " << ownerName << std::endl;
+    TakenPieceController::printTakenPieces(); //вызов базового метода
+}
+
+void AdvancedTakenPieceController::printSummaryOnly() const {
+    std::cout << "[Краткий отчёт от " << ownerName << "]" << std::endl;
+
+}
+
+AdvancedTakenPieceController* AdvancedTakenPieceController::shallowClone() const {
+    return new AdvancedTakenPieceController(*this); 
+}
+
+AdvancedTakenPieceController* AdvancedTakenPieceController::deepClone() const {
+    return new AdvancedTakenPieceController(*this); 
+}

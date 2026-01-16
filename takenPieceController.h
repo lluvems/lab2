@@ -42,13 +42,35 @@ public:
     int getCutKnight(color pieceColor);
     int getCutPawn(color pieceColor);
 
-    void printTakenPieces() const;
+    virtual void printTakenPieces() const;
 
     friend string getSummary(const TakenPieceController& tpc);
 
     bool operator==(const TakenPieceController& other) const;
     TakenPieceController& operator+=(const TakenPieceController& other);
     friend std::ostream& operator<<(std::ostream& os, const TakenPieceController& tpc);
+};
+
+class AdvancedTakenPieceController : public TakenPieceController {
+private:
+    std::string ownerName;
+public:
+    AdvancedTakenPieceController(const std::string& name);
+    AdvancedTakenPieceController(const AdvancedTakenPieceController& other); // глубокое копирование
+    AdvancedTakenPieceController& operator=(const AdvancedTakenPieceController& other);
+
+    // Запретим копирование через базовый класс напрямую
+    AdvancedTakenPieceController& operator=(const TakenPieceController& base) = delete;
+
+    // Перегрузка метода с вызовом базового
+    void printTakenPieces() const override;
+
+    // Новый метод — перегрузка без вызова базового
+    void printSummaryOnly() const;
+
+    // Клонирование
+    AdvancedTakenPieceController* shallowClone() const;
+    AdvancedTakenPieceController* deepClone() const;
 };
 
 #endif
