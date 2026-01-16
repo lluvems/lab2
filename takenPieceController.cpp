@@ -147,6 +147,8 @@ std::ostream& operator<<(std::ostream& os, const TakenPieceController& tpc) {
 }
 
 
+
+
 AdvancedTakenPieceController::AdvancedTakenPieceController(const std::string& name)
     : TakenPieceController(), ownerName(name) {
  

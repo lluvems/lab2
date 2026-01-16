@@ -59,13 +59,12 @@ public:
     AdvancedTakenPieceController(const AdvancedTakenPieceController& other); // глубокое копирование
     AdvancedTakenPieceController& operator=(const AdvancedTakenPieceController& other);
 
-    // Запретим копирование через базовый класс напрямую
     AdvancedTakenPieceController& operator=(const TakenPieceController& base) = delete;
 
     // Перегрузка метода с вызовом базового
     void printTakenPieces() const override;
 
-    // Новый метод — перегрузка без вызова базового
+    // Перегрузка без вызова базового
     void printSummaryOnly() const;
 
     // Клонирование
