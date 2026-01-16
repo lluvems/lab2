@@ -58,4 +58,25 @@ int main() {
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+
+
+    std::cout << "\nВиртуальные функции" << std::endl;
+    TakenPieceController* basePtr = new AdvancedTakenPieceController("Alice");
+    basePtr->printTakenPieces(); 
+
+    delete basePtr;
+
+    struct Base {
+        void nonVirtualPrint() const { std::cout << "Base\n"; }
+        virtual void virtualPrint() const { std::cout << "Base virtual\n"; }
+    };
+    struct Derived : Base {
+        void nonVirtualPrint() const { std::cout << "Derived\n"; }
+        void virtualPrint() const override { std::cout << "Derived virtual\n"; }
+    };
+
+    Base* ptr = new Derived();
+    ptr->nonVirtualPrint();   
+    ptr->virtualPrint();      
+    delete ptr;
 }
